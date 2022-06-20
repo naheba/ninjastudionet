@@ -1,0 +1,1409 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+* {
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    font-size: 40px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: lighter;
+    color: #3d3d3d;
+}
+
+h4 {
+    margin: auto;
+    font-size: 40px;
+    font-family: 'Oswald', sans-serif;
+}
+
+
+/*Menu fijo*/
+
+.fixed {
+    position: fixed;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    max-height: 95px;
+    width: 100%;
+    top: 0;
+    z-index: 20;
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgb(0, 0, 0, 0.3);
+    transition: ease 0.5s;
+    padding-left: 100px;
+}
+
+#logo {
+    padding-top: 5px;
+    width: 90px;
+}
+
+#logo:focus {
+    border: 1px solid black;
+}
+
+.titulo {
+    display: flex;
+    align-items: center;
+    font-family: 'Oswald', sans-serif;
+    color: black;
+    text-decoration: none;
+    padding: 0px;
+    font-size: calc(1em + 1vw);
+}
+
+nav {
+    text-align: right;
+    width: 1500px;
+    height: 70px;
+    line-height: 70px;
+}
+
+.nav {
+    margin: 0px 200px 0px 0px;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+}
+
+.nav a {
+    color: black;
+    font-family: 'Oswald', sans-serif;
+    clear: right;
+    text-decoration: none;
+    font-size: 17px;
+    padding: 0 10px;
+    margin: 0 10px;
+    line-height: 70px;
+}
+
+#move {
+    transition: ease-in-out 0.5s;
+}
+
+.flecha {
+    position: absolute;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin: 5px;
+    border-top: solid 4px;
+    border-right: solid 4px;
+    border-radius: 2px;
+    color: black;
+    transform: rotate(135deg);
+    left: 30px;
+}
+
+
+/*Para que no se vea el checkbox del menu desplegable*/
+
+.input {
+    display: none;
+}
+
+
+/*Para que no se vea el menu hamburguesa*/
+
+#menuArea {
+    display: none;
+}
+
+
+/*Guion de arriba del menu hamburguesa*/
+
+.open {
+    background-color: #171B1E;
+    width: 24px;
+    height: 2px;
+    display: block;
+    cursor: pointer;
+    position: absolute;
+    top: 40px;
+    z-index: 20;
+}
+
+
+/*Guion del medio del menu hamburguesa*/
+
+.open:before {
+    content: "";
+    background-color: #171B1E;
+    width: 24px;
+    height: 2px;
+    display: block;
+    position: absolute;
+    top: 6px;
+    transform: rotate(0deg);
+    transition: all 0.3s ease;
+}
+
+
+/*Guion de abajo del menu hamburguesa*/
+
+.open:after {
+    content: "";
+    background-color: #171B1E;
+    width: 24px;
+    height: 2px;
+    display: block;
+    position: absolute;
+    top: 12px;
+    transform: rotate(0deg);
+    transition: all 0.3s ease;
+}
+
+.menuOpen {
+    width: 24px;
+    height: 20px;
+    display: block;
+    padding: 15px;
+    cursor: pointer;
+    float: right;
+    z-index: 10;
+}
+
+.texto-oculto {
+    display: none;
+}
+
+.menu {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    background: linear-gradient( rgba(68, 108, 224, 0.96), rgba(68, 108, 224, 0.96));
+}
+
+.menu label {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    background-size: 100%;
+    cursor: pointer;
+}
+
+
+/*Centrar contenido del menu desplegable*/
+
+.menu .menuContent {
+    position: relative;
+    top: 50%;
+    font-size: 54px;
+    text-align: center;
+    padding-bottom: 20px;
+    margin-top: -300px;
+}
+
+
+/*Quitar estilo al listado ul*/
+
+.menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+}
+
+
+/*Estilo a los enlaces*/
+
+.menu ul li a {
+    display: block;
+    color: black;
+    text-decoration: none;
+    transition: color 0.2s;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    padding: 10px 0;
+}
+
+
+/*Ocultar menu y efectos de desaparecer*/
+
+.menuEffects {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s, visibility 0.5s;
+}
+
+
+/*Efectos de desaparecer*/
+
+.menuEffects ul {
+    transform: translateY(0%);
+    transition: all 0.5s;
+}
+
+
+/*Mostrar menu*/
+
+#menuToggle:checked~.menuEffects {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s;
+}
+
+#menuToggle:checked~.menuEffects ul {
+    opacity: 1;
+}
+
+
+/*Ocultar la linea de arriba para que en la X no haya 3 lineas*/
+
+#menuToggle:checked~.menuOpen .open {
+    background-color: transparent;
+}
+
+
+/*Colocar la linea del medio para crear la cruz para cerrar el menu*/
+
+#menuToggle:checked~.menuOpen .open:before {
+    content: "";
+    background-color: #000;
+    transform: rotate(45deg);
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 10;
+}
+
+
+/*Colocar la linea de abajo para crear la cruz para cerrar el menu*/
+
+#menuToggle:checked~.menuOpen .open:after {
+    content: "";
+    background-color: #000;
+    transform: rotate(-45deg);
+    position: relative;
+    top: 0;
+    right: 0;
+    z-index: 1;
+}
+
+
+/*Animación que baja el texto de arriba*/
+
+#menuToggle:not(:checked)~.menuEffects ul {
+    transform: translateY(-30%);
+}
+
+.fixed a:focus,
+.navbar>a:focus,
+#logo:focus,
+.titulo:focus,
+#home:focus,
+#portfolio:focus,
+#galery:focus,
+#cursos:focus,
+#conta:focus,
+.btn_portfolio:focus,
+.btn_cursos:focus,
+.btn_prices:focus,
+.redes a:focus,
+.btn_arriba a:focus,
+.contenido a:focus,
+.footer-redes a:focus {
+    border: 1px solid #3d3d3d;
+}
+
+
+/*
+Para asegurar left: 0  y top: 0, para que empecen arriba a la 
+izquierda aunque ya suelen comenzar desde ahi
+ */
+
+.slider {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+
+/*
+Posición absoluta para que todos los elemetos div con clase "slide" que desciendas de "sliders"
+esten uno encima de otro
+Para asegurar left: 0  y top: 0, para que empecen arriba a la izquierda 
+aunque ya suelen comenzar desde ahi
+*/
+
+.slider .slide {
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    visibility: hidden;
+    opacity: 0;
+    animation: slider 15s linear infinite;
+}
+
+.slider .slide:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.slider .slide:nth-child(2) {
+    animation-delay: 5s;
+}
+
+.slider .slide:nth-child(3) {
+    animation-delay: 10s;
+}
+
+.slider .slide img {
+    filter: contrast(65%) saturate(1) brightness(75%);
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    width: 100%;
+    height: 100vh;
+}
+
+
+/*Texto encima*/
+
+.slider .slide .contenido {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+.slider .slide .contenido h1 {
+    max-width: 1000px;
+    margin: 0px auto;
+    align-content: center;
+    color: white;
+    font-family: 'Oswald', sans-serif;
+    font-size: calc(1em + 6vw);
+    z-index: 1;
+}
+
+.slider .slide .contenido span {
+    color: white;
+    margin-top: .4em;
+    z-index: 1;
+    transition: all 0.8s;
+    cursor: grabbing;
+    font-size: calc(1em + 8vw);
+}
+
+.slider .slide .contenido span:hover {
+    color: #446CE0;
+    margin-top: .4em;
+    z-index: 1;
+}
+
+
+/* Slider */
+
+@keyframes slider {
+    0% {
+        visibility: hidden;
+        opacity: 0;
+    }
+    10% {
+        visibility: visible;
+        opacity: 1;
+    }
+    40% {
+        visibility: visible;
+        opacity: 1;
+    }
+    60%,
+    100% {
+        visibility: hidden;
+        opacity: 0;
+    }
+}
+
+
+/*Seccion home*/
+
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0px 30px 80px;
+    text-align: center;
+}
+
+.linea-azul {
+    display: inline-block;
+    margin: 100px 0px 10px;
+    border-top: solid 4px;
+    color: #446CE0;
+    width: 30px;
+    border-top: solid 3px;
+}
+
+.home-container h2 {
+    max-width: 700px;
+    font-size: 4em;
+    width: 100%;
+    margin: 0 0px 50px auto;
+    line-height: 70px;
+}
+
+.home-container div p {
+    font-size: 15px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: lighter;
+    color: #3d3d3d;
+    max-width: 700px;
+    width: 100%;
+    margin: 0 0 40px auto;
+    line-height: 25px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 30px;
+    grid-row-gap: 0px;
+    padding: 70px 0px;
+    margin: auto;
+}
+
+.cards div {
+    padding: 30px 0px;
+    margin: 0 15px;
+    box-sizing: border-box;
+    width: 380px;
+    border-radius: 20px;
+    color: #3d3d3d;
+    align-items: center;
+}
+
+.cards div span {
+    transition: all 0.8s;
+}
+
+.cards div h3 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: lighter;
+    font-size: 20px;
+}
+
+.cards div p {
+    font-size: 15.5px;
+    font-family: 'Roboto', sans-serif;
+    max-width: 300px;
+    width: 100%;
+    margin: auto;
+    line-height: 25px;
+}
+
+.cards div:hover {
+    transition: ease-in-out 0.5s;
+    box-shadow: 0px 0px 14px 6px rgba(204, 204, 204, 0.96);
+}
+
+.cards div:hover>span {
+    transform: rotate(360deg);
+}
+
+.cards div:hover>h3 {
+    color: #446CE0;
+}
+
+
+/*Sección Portfolio*/
+
+.portfolio {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+
+/*Alineación para que el centro de la imagen y del contenido este en el mismo nivel */
+
+.portfolio>div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto;
+}
+
+
+/*Responsive de la imagen del Portfolio*/
+
+.portfolio>div>img {
+    width: 100%;
+    height: auto;
+}
+
+
+/*Alinear verticalmente linea azul con el texto Portfolio*/
+
+.alinear-span {
+    display: flex;
+    align-items: center;
+}
+
+
+/*Estilo y posición de la linea azul*/
+
+.linea-azul-alineado {
+    border-top: solid 4px;
+    color: #446CE0;
+    width: 30px;
+    border-top: solid 3px;
+    margin-left: 90px;
+}
+
+
+/*Estilo y alineación del texto Portfolio*/
+
+.alinear-span>p {
+    color: black;
+    font-size: 15.5px;
+    font-family: 'Roboto', sans-serif;
+    max-width: 300px;
+    width: 100%;
+    margin: auto;
+    line-height: 25px;
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+
+/*Posicionamiento y tamaño del contenedor de los porcentajes*/
+
+.container-porcentajes {
+    max-width: 850px;
+    width: 100%;
+    padding: 0px 30px 0px 90px;
+}
+
+.container-porcentajes+h2 {
+    font-size: 40px;
+}
+
+.container-porcentajes>p {
+    font-size: 15px;
+    font-family: 'Roboto', sans-serif;
+    width: 100%;
+    margin: auto;
+    line-height: 25px;
+    color: #3d3d3d;
+}
+
+.porcentajes {
+    margin-top: 30px;
+}
+
+.porcentajes>div {
+    display: flex;
+}
+
+
+/*Estilo y posicionamiento del texto de cada barra en porcentajes*/
+
+.h6 {
+    color: #3d3d3d;
+    font-size: 15px;
+    font-weight: lighter;
+    font-family: 'Roboto', sans-serif;
+    width: 100%;
+    margin: auto;
+    line-height: 25px;
+}
+
+
+/*Estilo para que el para que el texto del porcentaje de la primera este en su posición*/
+
+.porcentajes :nth-child(1) :nth-child(2) {
+    font-family: 'Oswald', sans-serif;
+    font-weight: lighter;
+    font-size: 12px;
+    color: #171B1E;
+    margin-right: 21%;
+}
+
+
+/*Estilo para que el para que el texto del porcentaje de la segunda barra este en su posición (nth-child(3) porque es el tercer hijo, es decir, el tercer div si se pusiese el segundo se estaria seleccionando el div que contiene la barra y no el texto)*/
+
+.porcentajes :nth-child(3) :nth-child(2) {
+    font-family: 'Oswald', sans-serif;
+    font-weight: lighter;
+    font-size: 12px;
+    color: #171B1E;
+    margin-right: 5%;
+}
+
+
+/*Estilo para que el para que el texto del porcentaje de la tercera barra este en su posición (nth-child(3) porque es el tercer hijo, es decir, el quinto div si se pusiese el tercero se estaria seleccionando el div que contiene la barra y no el texto)*/
+
+.porcentajes :nth-child(5) :nth-child(2) {
+    font-family: 'Oswald', sans-serif;
+    font-weight: lighter;
+    font-size: 12px;
+    color: #171B1E;
+    margin-right: 13%;
+}
+
+
+/*Estilos y posicionamiento barra 1*/
+
+#barra1 {
+    background: #e9e9e9;
+    border-radius: 13px;
+    height: 10px;
+    width: 100%;
+}
+
+#barra1:after {
+    content: '';
+    display: block;
+    background: rgb(30, 33, 32);
+    background: linear-gradient(94deg, rgba(30, 33, 32, 1) 0%, rgba(29, 33, 31, 1) 4%, rgb(43, 48, 62) 32%, rgba(68, 108, 224, 1) 85%, rgba(68, 108, 224, 1) 100%);
+    width: 79%;
+    height: 100%;
+    border-radius: 9px;
+}
+
+
+/*Estilos y posicionamiento barra 2*/
+
+#barra2 {
+    background: #e9e9e9;
+    border-radius: 13px;
+    height: 10px;
+    width: 100%;
+}
+
+#barra2:after {
+    content: '';
+    display: block;
+    background: rgb(30, 33, 32);
+    background: linear-gradient(94deg, rgba(30, 33, 32, 1) 0%, rgba(29, 33, 31, 1) 4%, rgb(43, 48, 62) 32%, rgba(68, 108, 224, 1) 85%, rgba(68, 108, 224, 1) 100%);
+    width: 95%;
+    height: 100%;
+    border-radius: 9px;
+}
+
+
+/*Estilos y posicionamiento barra 3*/
+
+#barra3 {
+    background: #e9e9e9;
+    border-radius: 13px;
+    height: 10px;
+    width: 100%;
+}
+
+#barra3:after {
+    content: '';
+    display: block;
+    background: rgb(30, 33, 32);
+    background: linear-gradient(94deg, rgba(30, 33, 32, 1) 0%, rgba(29, 33, 31, 1) 4%, rgb(43, 48, 62) 32%, rgba(68, 108, 224, 1) 85%, rgba(68, 108, 224, 1) 100%);
+    width: 87%;
+    height: 100%;
+    border-radius: 9px;
+}
+
+
+/*Boton para descargar el protfolio*/
+
+.btn_portfolio {
+    background-color: #446CE0;
+    border-radius: 28px;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 14px 60px;
+    text-decoration: none;
+    text-align: center;
+    margin-top: 40px;
+}
+
+
+/* Area galeria */
+
+#galeria-area {
+    max-width: 1200px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    padding: 40px;
+}
+
+
+/*Posicionamiento del texto de la galeria*/
+
+.texto-galeria {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
+/*Tamaño y margen para cualquier div que sea hijo directo del div con la clase texto-galeria*/
+
+.texto-galeria>div {
+    max-height: 400px;
+    margin-bottom: 40px;
+}
+
+.texto-galeria>div>h2 {
+    font-size: 50px;
+}
+
+
+/*Texto que siempre va acompañado de la linea*/
+
+#texto-op {
+    color: black;
+    font-size: 15.5px;
+    font-family: 'Roboto', sans-serif;
+    width: 100%;
+    margin: auto;
+    font-weight: bold;
+    margin-bottom: 40px;
+}
+
+
+/*Estilos para el segundo hijo(div) del div con la clasetexto-galeria */
+
+.texto-galeria div:nth-child(2) {
+    max-width: 510px;
+    font-size: 15.4px;
+    font-family: sans-serif;
+    width: 100%;
+    margin: auto;
+    line-height: 25px;
+    color: #2b2b2b;
+}
+
+
+/*Texto de frase motivadora en negrita*/
+
+.texto-galeria span {
+    font-weight: bold;
+}
+
+
+/*Grid para la galeria de proyectos*/
+
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+
+/*Imagenes responsivas*/
+
+.gallery__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+/*Primera imagen ocupa 2 filas*/
+
+.gallery__item:nth-child(1) {
+    grid-row: span 2;
+}
+
+
+/*Tercera y quinta imagen ocupan 2 filas y 2 columnas*/
+
+.gallery__item:nth-child(3),
+.gallery__item:nth-child(5) {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+
+/*Sexta imagen ocupa 2 columnas*/
+
+.gallery__item:nth-child(6) {
+    grid-column: span 2;
+}
+
+
+/*Posicionamiento frase*/
+
+.frase {
+    margin-top: 10px;
+    text-align: center;
+    align-items: center;
+    width: 100%;
+}
+
+
+/*Estilo frase*/
+
+.frase h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 60px;
+    font-weight: lighter;
+}
+
+
+/*Sección Cursos*/
+
+#cursos-area {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+
+/*Centrado*/
+
+#cursos-area>div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto;
+}
+
+
+/*Color de fondo*/
+
+#cursos-area>div:first-child {
+    background-color: #446CE0;
+}
+
+
+/*Imagen responsiva*/
+
+#cursos-area>div>img {
+    width: 100%;
+    height: auto;
+}
+
+
+/*Alineación y centrado para la inea blanca y texto "Novedades" de cursos*/
+
+.span-cursos {
+    display: flex;
+    align-items: center;
+    max-width: 700px;
+    width: 100%;
+    padding: 0% 10% 0% 15%;
+}
+
+
+/*Estilo linea blanca*/
+
+.linea-blanca {
+    border-top: solid 4px;
+    color: #ffffff;
+    width: 30px;
+    border-top: solid 3px;
+}
+
+.span-cursos>p {
+    color: white;
+    font-size: 15.5px;
+    font-family: 'Roboto', sans-serif;
+    width: 100%;
+    margin: auto;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+
+/*Contenedor del texto del apartado cursos*/
+
+.curso {
+    max-width: 880px;
+    width: 100%;
+    padding: 0% 10% 0% 15%;
+}
+
+.curso h2 {
+    color: white;
+}
+
+.curso p {
+    color: white;
+    font-size: 15.2px;
+    font-family: 'Roboto', sans-serif;
+    width: 100%;
+    margin: auto;
+    line-height: 25px;
+}
+
+
+/*Estilo botón precios de los cursos*/
+
+.btn_cursos {
+    background-color: #3d3d3d;
+    border-radius: 28px;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 14px 60px;
+    text-decoration: none;
+    text-align: center;
+    margin-top: 40px;
+}
+
+
+/*Contenedor de los precios de los precios*/
+
+.prices-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+}
+
+
+/*Grid de los precios*/
+
+.prices {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 30px;
+    grid-row-gap: 0px;
+    padding: 70px 0px;
+    margin: auto;
+}
+
+
+/*Estilo de la caja del precio*/
+
+.prices div {
+    padding: 40px;
+    margin: 0 15px;
+    box-sizing: border-box;
+    width: 380px;
+    border-radius: 8px;
+    color: #3d3d3d;
+    align-items: center;
+}
+
+.prices div h3 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: lighter;
+    font-size: 24px;
+}
+
+.prices div p {
+    font-size: 15px;
+    font-family: 'Roboto', sans-serif;
+    max-width: 300px;
+    width: 100%;
+    margin: auto;
+    line-height: 25px;
+}
+
+.desc {
+    font-size: 16px !important;
+    line-height: 35px !important;
+}
+
+
+/*Estilos para cada elemento cuando se haga hover en el div de cada precio*/
+
+.prices div:hover {
+    transition: ease-in-out 0.5s;
+    box-shadow: 0px 0px 14px 6px rgba(204, 204, 204, 0.96);
+}
+
+.prices div:hover>h3,
+.prices div:hover>h4 {
+    color: #446CE0;
+}
+
+.prices div:hover>a {
+    color: #446CE0;
+    border: 1px solid #446CE0;
+}
+
+.prices div h4 {
+    font-size: 60px;
+    margin: 15px;
+}
+
+
+/*Tamaño  de letra del sub y sup*/
+
+sub,
+sup {
+    font-size: 15px;
+}
+
+
+/*Boton "Leer mas" de los precios*/
+
+.btn_prices {
+    background-color: transparent;
+    border-radius: 28px;
+    display: inline-block;
+    cursor: pointer;
+    color: #2b2b2b;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 12px 50px;
+    border: 1px solid #2b2b2b;
+    text-decoration: none;
+    text-align: center;
+    margin-top: 40px;
+}
+
+
+/*Alineación contacto*/
+
+.contacto {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 60px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.contacto span {
+    color: black;
+    font-weight: bold;
+}
+
+.contacto>div {
+    margin: 50px;
+    padding: 10px;
+    text-align: justify;
+}
+
+.contacto h4 {
+    font-size: 3em;
+}
+
+
+/*Posicionamiento y quitar estilo al listado de las redes sociales*/
+
+.redes {
+    padding-right: 20px;
+    display: flex;
+    list-style: none;
+}
+
+.redes li {
+    padding: 0px 15px;
+}
+
+.redes li:first-child {
+    margin-left: -55px;
+}
+
+.redes span {
+    font-size: 22px;
+}
+
+.redes span:hover {
+    cursor: grabbing;
+    color: #446CE0;
+}
+
+
+/*Estilos necesarios para el mapa*/
+
+.mapa {
+    width: 555px;
+    height: 484px;
+    border: 0px;
+}
+
+
+/*Estilos necesarios para el footer*/
+
+footer {
+    background-color: #446CE0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 0;
+}
+
+footer p {
+    color: #ffffff;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+/*Redes sociales en el footer*/
+
+.footer-redes ul {
+    padding-right: 40px;
+    display: flex;
+    list-style: none;
+}
+
+.footer-redes a {
+    border-radius: 50%;
+    color: #ffffff;
+}
+
+.footer-redes a:first-child {
+    padding: 13px 17px;
+}
+
+.footer-redes span {
+    font-size: 18px;
+}
+
+.footer-redes span:hover {
+    cursor: grabbing;
+    color: #000;
+}
+
+
+/*Boton en el footer para subir arriba del todo*/
+
+.btn_arriba {
+    margin: 0em 7em;
+}
+
+.btn_arriba a {
+    font-size: 60px;
+    color: #ffffff;
+}
+
+.btn_arriba a:hover {
+    color: rgb(255, 165, 95);
+}
+
+@media only screen and (max-width: 1280px) {
+    /*Header Fijo*/
+    .fixed {
+        padding-left: 20px;
+        padding-right: 60px;
+    }
+    /*Ocultar barra navegación*/
+    .nav {
+        text-align: center;
+        width: 100%;
+        display: none;
+    }
+    .nav a {
+        display: block;
+        margin: 0;
+    }
+    /*Mostrar menu hamburguesa para desplegar*/
+    #menuArea {
+        display: block;
+    }
+    /*Tamaño letra menu desplegable*/
+    .menu ul li a {
+        font-size: 35px;
+    }
+    /*Tarjetas del home para que vayan en linea*/
+    .cards {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .cards div {
+        width: auto;
+    }
+    /*Portafolio para que se ponga en linea de 1 la foto y en contenido del portafolio*/
+    .portfolio {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 2rem;
+    }
+    /*Alinear tanto vertical como horizontal todo el contenido del portafolio*/
+    .portfolio>div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+    }
+    /*Colocar arriba de portfolio la linea azul*/
+    .alinear-span {
+        flex-direction: column;
+    }
+    /*Alinear y separar linea azul*/
+    .linea-azul-alineado {
+        margin-left: 20px;
+        margin-bottom: 10px;
+    }
+    .container-porcentajes+h2 {
+        font-size: 35px;
+    }
+    .container-porcentajes {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        text-align: center;
+        padding: 0px 80px;
+    }
+    /*Alinear todos los porcentajes,sino se pone se comprime todos los porcentajes ya que no se le asigna 100% de width y el texto se coloca en el centro*/
+    .porcentajes {
+        text-align: start;
+        width: 100%;
+    }
+    /*Centrar y colocar texto explicativo de la galeria*/
+    .texto-galeria {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .texto-galeria div h2 {
+        margin: auto;
+        font-size: 35px;
+    }
+    /*Modificar el grid para que sea responsive y las fotos no esten tan apretadas que ni se vean*/
+    .gallery-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .gallery__img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .gallery__item:nth-child(1) {
+        grid-row: span 2;
+    }
+    .gallery__item:nth-child(3),
+    .gallery__item:nth-child(5) {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+    /*Colocar area de cursos verticalmente para mejor visualización*/
+    #cursos-area {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+    }
+    /*Centrar contenido*/
+    #cursos-area>div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+    }
+    /*Alineación de la linea blanca*/
+    .span-cursos {
+        flex-direction: column;
+        padding: 8% 0% 0% 0%;
+    }
+    /*Alineación del texto Novedades*/
+    .span-cursos>p {
+        margin: 10px 0px 0px 0px;
+        text-align: center;
+    }
+    /*Centrar h2, texto y botón*/
+    .curso {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        text-align: center;
+        padding: 0px 80px;
+    }
+    .btn_cursos {
+        margin-bottom: 40px;
+    }
+    /*Fila de 1 de los precios*/
+    .prices {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: 1fr;
+        grid-column-gap: 30px;
+        grid-row-gap: 20px;
+    }
+    /*Centrar todo contenido del contacto*/
+    .contacto {
+        display: inline-block;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Roboto', sans-serif;
+        margin: 0px;
+    }
+    /*Alinear el bloque entero que contiene la información*/
+    .contacto>div {
+        margin: 0px;
+        padding: 10px;
+        text-align: center;
+    }
+    /*Alinear redes*/
+    .redes {
+        padding-right: 0px;
+        justify-content: center;
+    }
+    /*Footer*/
+    footer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+    /*Ocular mapa y redes del footer*/
+    iframe,
+    .footer-redes {
+        display: none;
+        visibility: hidden;
+    }
+}
+
+@media only screen and (max-width: 980px) {
+    /*Fila de 1 para las fotos de la galeria*/
+    .gallery-container {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 1rem;
+    }
+    .gallery__img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    /*Las imagenes que ocupaban más de 1 espacio ya se verticalmente, horinzontalmente o ambas vuelven a ocupar un unico espacio*/
+    .gallery__item:nth-child(1) {
+        grid-row: span 1;
+    }
+    .gallery__item:nth-child(3),
+    .gallery__item:nth-child(5) {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+    .gallery__item:nth-child(6) {
+        grid-column: span 1;
+    }
+}
